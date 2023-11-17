@@ -1,0 +1,100 @@
+---
+title: "Progress Memo 2"
+subtitle: |
+  | Final Project 
+  | Data Science 1 with R (STAT 301-1)
+author: "Sonia Bhatia"
+date: today
+
+format:
+  html:
+    toc: true
+    embed-resources: true
+    
+execute:
+  echo: false
+  warning: false
+
+from: markdown+emoji 
+---
+
+
+
+::: {.callout-tip icon=false}
+
+## Github Repo Link
+
+My github link is below.
+
+[https://github.com/stat301-1-2023-fall/final-project-1-soniab101](https://github.com/stat301-1-2023-fall/final-project-1-soniab101)
+
+:::
+
+##Load in Data and Packages
+```{r}
+library(tidyverse)
+library(skimr)
+WorldCupMatches <- read_csv("data/WorldCupMatches.csv")
+WorldCupPlayers <- read_csv("data/WorldCupPlayers.csv")
+WorldCups <- read_csv("data/WorldCups.csv")
+
+```
+
+# summary of the datasets
+
+# Investigating the data:
+```{r}
+summary(WorldCups)
+summary(WorldCupMatches)
+
+skim(WorldCups)
+skim(WorldCupMatches)
+# once you get everything from summary, go into each var and investigate it
+# look at the distribution of scores
+
+# Clean the team name Germany,
+# when merging, could delete some cols if they aren't useful
+# look into the column that has the NA values, could potentially delete the observations with NA values or even the entire column
+# could change the NA values to the average so that they don't impact the analysis
+
+
+WorldCups  |>  summarize(n=n(),.by=Winner)
+
+```
+
+# Cleaning the Data
+I noticed that the team name Germany was coded both as Germany and also Germany FR. After investigating the meaning of this, I realized that Germany FR was West Germany before the country was reunified. I decided to recode Germany FR as Germany, since that is how the country is considered today,
+
+# Analysis 1
+Performance trend in top 4 teams that have won the most world cup matches over time
+
+explore the data, missingness, univariate, bivariate, multivariate analysis
+
+```{r}
+
+```
+
+
+# Example join:
+```{r}
+# Example data frames
+world_cup_matches <- data.frame(
+  Year = c(2018, 2018, 2014, 2014),
+  Match = c("Final", "Semifinal", "Final", "Semifinal"),
+  Team = c("France", "Croatia", "Germany", "Argentina"),
+  Score = c(4, 2, 1, 0)
+)
+
+world_cups <- data.frame(
+  Year = c(2018, 2014),
+  Host = c("Russia", "Brazil"),
+  Winner = c("France", "Germany")
+)
+
+# Perform a left join based on the "Year" column
+merged_data <- left_join(world_cup_matches, world_cups, by = "Year")
+
+# Print the merged data
+print(merged_data)
+```
+
