@@ -58,12 +58,34 @@ skim(WorldCupMatches)
 # could change the NA values to the average so that they don't impact the analysis
 
 
-WorldCups  |>  summarize(n=n(),.by=Winner)
+WorldCupsCleaned  |>  summarize(n=n(),.by=Winner)
 
 ```
 
 # Cleaning the Data
-I noticed that the team name Germany was coded both as Germany and also Germany FR. After investigating the meaning of this, I realized that Germany FR was West Germany before the country was reunified. I decided to recode Germany FR as Germany, since that is how the country is considered today,
+I noticed that the team name Germany was coded both as Germany and also Germany FR. After investigating the meaning of this, I realized that Germany FR was West Germany before the country was reunified. I decided to recode Germany FR as Germany, since that is how the country is considered today, and their overall world cup wins are measured for the country as a whole officially. 
+
+```{r}
+WorldCupsCleaned <- mutate_if(WorldCups,
+                                is.character,
+                                stringr::str_replace_all, pattern = "Germany FR", replacement = "Germany")
+
+WorldCupMatchesCleaned <- mutate_if(WorldCupMatches,
+                                is.character,
+                                stringr::str_replace_all, pattern = "Germany FR", replacement = "Germany")
+
+
+
+```
+
+
+# Univariate Analysis
+I am investigating the distribution of the number of World Cups each of these countries has won.
+```{r}
+WorldCupsCleaned |> ggplot(aes(x=Winner)) + geom_bar()
+
+```
+
 
 # Analysis 1
 Performance trend in top 4 teams that have won the most world cup matches over time
