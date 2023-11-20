@@ -44,20 +44,11 @@ WorldCups <- read_csv("data/WorldCups.csv")
 
 # Investigating the data:
 ```{r}
-summary(WorldCups)
-summary(WorldCupMatches)
+glimpse(WorldCups)
+glimpse(WorldCupMatches)
 
-skim(WorldCups)
-skim(WorldCupMatches)
-# once you get everything from summary, go into each var and investigate it
-# look at the distribution of scores
-
-# Clean the team name Germany,
-# when merging, could delete some cols if they aren't useful
-# look into the column that has the NA values, could potentially delete the observations with NA values or even the entire column
-# could change the NA values to the average so that they don't impact the analysis
-
-
+#skim(WorldCups)
+#skim(WorldCupMatches)
 
 
 ```
@@ -97,6 +88,10 @@ I am exploring the
 ```{r}
 WorldCupsCleaned |> ggplot(aes(x=Year,y=GoalsScored)) + geom_line(color = "darkorchid") + labs(title = "Total Goals Scored in the World Cup over the Years", x = "Year", y = "Total Goals")
 ```
+
+
+# Summary of Progress
+
 
 # Analysis 1
 Performance trend in top 4 teams that have won the most world cup matches over time
