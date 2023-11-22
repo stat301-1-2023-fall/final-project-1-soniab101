@@ -65,6 +65,10 @@ WorldCupMatchesCleaned <- mutate_if(WorldCupMatches,
                                 is.character,
                                 stringr::str_replace_all, pattern = "Germany FR", replacement = "Germany")
 
+join <- WorldCupMatchesCleaned |> left_join(WorldCupsCleaned, by = "Year")
+join
+
+
 WorldCupsCleaned  |>  summarize(n=n(),.by=Winner) 
 
 ```
