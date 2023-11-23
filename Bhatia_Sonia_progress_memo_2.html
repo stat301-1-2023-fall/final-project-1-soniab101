@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Sonia Bhatia">
-<meta name="dcterms.date" content="2023-11-19">
+<meta name="dcterms.date" content="2023-11-22">
 
 <title>Progress Memo 2</title>
 <style>
@@ -2995,8 +2995,7 @@ vertical-align: -.125em;
   <li><a href="#investigating-the-data" id="toc-investigating-the-data" class="nav-link" data-scroll-target="#investigating-the-data">Investigating the data:</a></li>
   <li><a href="#cleaning-the-data" id="toc-cleaning-the-data" class="nav-link" data-scroll-target="#cleaning-the-data">Cleaning the Data</a></li>
   <li><a href="#univariate-analysis" id="toc-univariate-analysis" class="nav-link" data-scroll-target="#univariate-analysis">Univariate Analysis</a></li>
-  <li><a href="#analysis-1" id="toc-analysis-1" class="nav-link" data-scroll-target="#analysis-1">Analysis 1</a></li>
-  <li><a href="#example-join" id="toc-example-join" class="nav-link" data-scroll-target="#example-join">Example join:</a></li>
+  <li><a href="#summary-of-progress" id="toc-summary-of-progress" class="nav-link" data-scroll-target="#summary-of-progress">Summary of Progress</a></li>
   </ul>
 </nav>
 </div>
@@ -3023,7 +3022,7 @@ Data Science 1 with R (STAT 301-1)</p><p></p>
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 19, 2023</p>
+      <p class="date">November 22, 2023</p>
     </div>
   </div>
   
@@ -3047,6 +3046,19 @@ Github Repo Link
 <p><a href="https://github.com/stat301-1-2023-fall/final-project-1-soniab101">https://github.com/stat301-1-2023-fall/final-project-1-soniab101</a></p>
 </div>
 </div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Link to kaggle dataset
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="https://www.kaggle.com/datasets/abecklas/fifa-world-cup?select=WorldCups.csv">World Cups and World Cup Matches datasets</a></p>
+</div>
+</div>
 <p>##Load in Data and Packages</p>
 <section id="summary-of-the-datasets" class="level1">
 <h1>summary of the datasets</h1>
@@ -3055,611 +3067,42 @@ Github Repo Link
 <h1>Investigating the data:</h1>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>      Year        Country             Winner           Runners-Up       
- Min.   :1930   Length:20          Length:20          Length:20         
- 1st Qu.:1957   Class :character   Class :character   Class :character  
- Median :1976   Mode  :character   Mode  :character   Mode  :character  
- Mean   :1975                                                           
- 3rd Qu.:1995                                                           
- Max.   :2014                                                           
-    Third              Fourth           GoalsScored    QualifiedTeams 
- Length:20          Length:20          Min.   : 70.0   Min.   :13.00  
- Class :character   Class :character   1st Qu.: 89.0   1st Qu.:16.00  
- Mode  :character   Mode  :character   Median :120.5   Median :16.00  
-                                       Mean   :119.0   Mean   :21.25  
-                                       3rd Qu.:145.2   3rd Qu.:26.00  
-                                       Max.   :171.0   Max.   :32.00  
- MatchesPlayed   Attendance       
- Min.   :17.0   Length:20         
- 1st Qu.:30.5   Class :character  
- Median :38.0   Mode  :character  
- Mean   :41.8                     
- 3rd Qu.:55.0                     
- Max.   :64.0                     </code></pre>
+<pre><code>Rows: 20
+Columns: 10
+$ Year           &lt;dbl&gt; 1930, 1934, 1938, 1950, 1954, 1958, 1962, 1966, 1970, 1…
+$ Country        &lt;chr&gt; &quot;Uruguay&quot;, &quot;Italy&quot;, &quot;France&quot;, &quot;Brazil&quot;, &quot;Switzerland&quot;, …
+$ Winner         &lt;chr&gt; &quot;Uruguay&quot;, &quot;Italy&quot;, &quot;Italy&quot;, &quot;Uruguay&quot;, &quot;Germany FR&quot;, &quot;…
+$ `Runners-Up`   &lt;chr&gt; &quot;Argentina&quot;, &quot;Czechoslovakia&quot;, &quot;Hungary&quot;, &quot;Brazil&quot;, &quot;Hu…
+$ Third          &lt;chr&gt; &quot;USA&quot;, &quot;Germany&quot;, &quot;Brazil&quot;, &quot;Sweden&quot;, &quot;Austria&quot;, &quot;Franc…
+$ Fourth         &lt;chr&gt; &quot;Yugoslavia&quot;, &quot;Austria&quot;, &quot;Sweden&quot;, &quot;Spain&quot;, &quot;Uruguay&quot;, …
+$ GoalsScored    &lt;dbl&gt; 70, 70, 84, 88, 140, 126, 89, 89, 95, 97, 102, 146, 132…
+$ QualifiedTeams &lt;dbl&gt; 13, 16, 15, 13, 16, 16, 16, 16, 16, 16, 16, 24, 24, 24,…
+$ MatchesPlayed  &lt;dbl&gt; 18, 17, 18, 22, 26, 35, 32, 32, 32, 38, 38, 52, 52, 52,…
+$ Attendance     &lt;chr&gt; &quot;590.549&quot;, &quot;363.000&quot;, &quot;375.700&quot;, &quot;1.045.246&quot;, &quot;768.607&quot;…</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>      Year        Datetime            Stage             Stadium         
- Min.   :1930   Length:4572        Length:4572        Length:4572       
- 1st Qu.:1970   Class :character   Class :character   Class :character  
- Median :1990   Mode  :character   Mode  :character   Mode  :character  
- Mean   :1985                                                           
- 3rd Qu.:2002                                                           
- Max.   :2014                                                           
- NA&#39;s   :3720                                                           
-     City           Home Team Name     Home Team Goals  Away Team Goals
- Length:4572        Length:4572        Min.   : 0.000   Min.   :0.000  
- Class :character   Class :character   1st Qu.: 1.000   1st Qu.:0.000  
- Mode  :character   Mode  :character   Median : 2.000   Median :1.000  
-                                       Mean   : 1.811   Mean   :1.022  
-                                       3rd Qu.: 3.000   3rd Qu.:2.000  
-                                       Max.   :10.000   Max.   :7.000  
-                                       NA&#39;s   :3720     NA&#39;s   :3720   
- Away Team Name     Win conditions       Attendance     Half-time Home Goals
- Length:4572        Length:4572        Min.   :  2000   Min.   :0.000       
- Class :character   Class :character   1st Qu.: 30000   1st Qu.:0.000       
- Mode  :character   Mode  :character   Median : 41580   Median :0.000       
-                                       Mean   : 45165   Mean   :0.709       
-                                       3rd Qu.: 61374   3rd Qu.:1.000       
-                                       Max.   :173850   Max.   :6.000       
-                                       NA&#39;s   :3722     NA&#39;s   :3720        
- Half-time Away Goals   Referee          Assistant 1        Assistant 2       
- Min.   :0.000        Length:4572        Length:4572        Length:4572       
- 1st Qu.:0.000        Class :character   Class :character   Class :character  
- Median :0.000        Mode  :character   Mode  :character   Mode  :character  
- Mean   :0.428                                                                
- 3rd Qu.:1.000                                                                
- Max.   :5.000                                                                
- NA&#39;s   :3720                                                                 
-    RoundID            MatchID          Home Team Initials Away Team Initials
- Min.   :     201   Min.   :       25   Length:4572        Length:4572       
- 1st Qu.:     262   1st Qu.:     1189   Class :character   Class :character  
- Median :     337   Median :     2191   Mode  :character   Mode  :character  
- Mean   :10661773   Mean   : 61346868                                        
- 3rd Qu.:  249722   3rd Qu.: 43950059                                        
- Max.   :97410600   Max.   :300186515                                        
- NA&#39;s   :3720       NA&#39;s   :3720                                             </code></pre>
-</div>
-<div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<caption>Data summary</caption>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Name</td>
-<td style="text-align: left;">WorldCups</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Number of rows</td>
-<td style="text-align: left;">20</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Number of columns</td>
-<td style="text-align: left;">10</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">_______________________</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Column type frequency:</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">character</td>
-<td style="text-align: left;">6</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">numeric</td>
-<td style="text-align: left;">4</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">________________________</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Group variables</td>
-<td style="text-align: left;">None</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Variable type: character</strong></p>
-<table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 19%">
-<col style="width: 13%">
-<col style="width: 19%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 8%">
-<col style="width: 12%">
-<col style="width: 15%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">skim_variable</th>
-<th style="text-align: right;">n_missing</th>
-<th style="text-align: right;">complete_rate</th>
-<th style="text-align: right;">min</th>
-<th style="text-align: right;">max</th>
-<th style="text-align: right;">empty</th>
-<th style="text-align: right;">n_unique</th>
-<th style="text-align: right;">whitespace</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Country</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Winner</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Runners-Up</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Third</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Fourth</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">16</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Attendance</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">0</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Variable type: numeric</strong></p>
-<table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 16%">
-<col style="width: 10%">
-<col style="width: 15%">
-<col style="width: 8%">
-<col style="width: 6%">
-<col style="width: 5%">
-<col style="width: 7%">
-<col style="width: 7%">
-<col style="width: 8%">
-<col style="width: 5%">
-<col style="width: 6%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">skim_variable</th>
-<th style="text-align: right;">n_missing</th>
-<th style="text-align: right;">complete_rate</th>
-<th style="text-align: right;">mean</th>
-<th style="text-align: right;">sd</th>
-<th style="text-align: right;">p0</th>
-<th style="text-align: right;">p25</th>
-<th style="text-align: right;">p50</th>
-<th style="text-align: right;">p75</th>
-<th style="text-align: right;">p100</th>
-<th style="text-align: left;">hist</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Year</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1974.80</td>
-<td style="text-align: right;">25.58</td>
-<td style="text-align: right;">1930</td>
-<td style="text-align: right;">1957.0</td>
-<td style="text-align: right;">1976.0</td>
-<td style="text-align: right;">1995.00</td>
-<td style="text-align: right;">2014</td>
-<td style="text-align: left;">▅▆▆▆▇</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">GoalsScored</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">118.95</td>
-<td style="text-align: right;">32.97</td>
-<td style="text-align: right;">70</td>
-<td style="text-align: right;">89.0</td>
-<td style="text-align: right;">120.5</td>
-<td style="text-align: right;">145.25</td>
-<td style="text-align: right;">171</td>
-<td style="text-align: left;">▇▃▂▇▃</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">QualifiedTeams</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">21.25</td>
-<td style="text-align: right;">7.27</td>
-<td style="text-align: right;">13</td>
-<td style="text-align: right;">16.0</td>
-<td style="text-align: right;">16.0</td>
-<td style="text-align: right;">26.00</td>
-<td style="text-align: right;">32</td>
-<td style="text-align: left;">▇▁▃▁▃</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">MatchesPlayed</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">41.80</td>
-<td style="text-align: right;">17.22</td>
-<td style="text-align: right;">17</td>
-<td style="text-align: right;">30.5</td>
-<td style="text-align: right;">38.0</td>
-<td style="text-align: right;">55.00</td>
-<td style="text-align: right;">64</td>
-<td style="text-align: left;">▇▆▃▆▇</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<caption>Data summary</caption>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Name</td>
-<td style="text-align: left;">WorldCupMatches</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Number of rows</td>
-<td style="text-align: left;">4572</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Number of columns</td>
-<td style="text-align: left;">20</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">_______________________</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Column type frequency:</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">character</td>
-<td style="text-align: left;">12</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">numeric</td>
-<td style="text-align: left;">8</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">________________________</td>
-<td style="text-align: left;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Group variables</td>
-<td style="text-align: left;">None</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Variable type: character</strong></p>
-<table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 24%">
-<col style="width: 12%">
-<col style="width: 18%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 7%">
-<col style="width: 11%">
-<col style="width: 14%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">skim_variable</th>
-<th style="text-align: right;">n_missing</th>
-<th style="text-align: right;">complete_rate</th>
-<th style="text-align: right;">min</th>
-<th style="text-align: right;">max</th>
-<th style="text-align: right;">empty</th>
-<th style="text-align: right;">n_unique</th>
-<th style="text-align: right;">whitespace</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Datetime</td>
-<td style="text-align: right;">3720</td>
-<td style="text-align: right;">0.19</td>
-<td style="text-align: right;">19</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">602</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Stage</td>
-<td style="text-align: right;">3720</td>
-<td style="text-align: right;">0.19</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">24</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">23</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Stadium</td>
-<td style="text-align: right;">3720</td>
-<td style="text-align: right;">0.19</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">50</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">181</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">City</td>
-<td style="text-align: right;">3720</td>
-<td style="text-align: right;">0.19</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">33</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">151</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Home Team Name</td>
-<td style="text-align: right;">3720</td>
-<td style="text-align: right;">0.19</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">26</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">78</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Away Team Name</td>
-<td style="text-align: right;">3720</td>
-<td style="text-align: right;">0.19</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">26</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">83</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Win conditions</td>
-<td style="text-align: right;">4507</td>
-<td style="text-align: right;">0.01</td>
-<td style="text-align: right;">18</td>
-<td style="text-align: right;">44</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">42</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Referee</td>
-<td style="text-align: right;">3720</td>
-<td style="text-align: right;">0.19</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">36</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">366</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Assistant 1</td>
-<td style="text-align: right;">3720</td>
-<td style="text-align: right;">0.19</td>
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">36</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">387</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Assistant 2</td>
-<td style="text-align: right;">3720</td>
-<td style="text-align: right;">0.19</td>
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">36</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">408</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Home Team Initials</td>
-<td style="text-align: right;">3720</td>
-<td style="text-align: right;">0.19</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">77</td>
-<td style="text-align: right;">0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Away Team Initials</td>
-<td style="text-align: right;">3720</td>
-<td style="text-align: right;">0.19</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">82</td>
-<td style="text-align: right;">0</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Variable type: numeric</strong></p>
-<table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 17%">
-<col style="width: 8%">
-<col style="width: 11%">
-<col style="width: 10%">
-<col style="width: 10%">
-<col style="width: 4%">
-<col style="width: 7%">
-<col style="width: 6%">
-<col style="width: 9%">
-<col style="width: 8%">
-<col style="width: 5%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">skim_variable</th>
-<th style="text-align: right;">n_missing</th>
-<th style="text-align: right;">complete_rate</th>
-<th style="text-align: right;">mean</th>
-<th style="text-align: right;">sd</th>
-<th style="text-align: right;">p0</th>
-<th style="text-align: right;">p25</th>
-<th style="text-align: right;">p50</th>
-<th style="text-align: right;">p75</th>
-<th style="text-align: right;">p100</th>
-<th style="text-align: left;">hist</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Year</td>
-<td style="text-align: right;">3720</td>
-<td style="text-align: right;">0.19</td>
-<td style="text-align: right;">1985.09</td>
-<td style="text-align: right;">22.45</td>
-<td style="text-align: right;">1930</td>
-<td style="text-align: right;">1970.00</td>
-<td style="text-align: right;">1990.0</td>
-<td style="text-align: right;">2002.0</td>
-<td style="text-align: right;">2014</td>
-<td style="text-align: left;">▁▃▃▅▇</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Home Team Goals</td>
-<td style="text-align: right;">3720</td>
-<td style="text-align: right;">0.19</td>
-<td style="text-align: right;">1.81</td>
-<td style="text-align: right;">1.61</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">2.0</td>
-<td style="text-align: right;">3.0</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: left;">▇▂▁▁▁</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Away Team Goals</td>
-<td style="text-align: right;">3720</td>
-<td style="text-align: right;">0.19</td>
-<td style="text-align: right;">1.02</td>
-<td style="text-align: right;">1.09</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0.00</td>
-<td style="text-align: right;">1.0</td>
-<td style="text-align: right;">2.0</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: left;">▇▂▁▁▁</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Attendance</td>
-<td style="text-align: right;">3722</td>
-<td style="text-align: right;">0.19</td>
-<td style="text-align: right;">45164.80</td>
-<td style="text-align: right;">23485.25</td>
-<td style="text-align: right;">2000</td>
-<td style="text-align: right;">30000.00</td>
-<td style="text-align: right;">41579.5</td>
-<td style="text-align: right;">61374.5</td>
-<td style="text-align: right;">173850</td>
-<td style="text-align: left;">▆▇▂▁▁</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Half-time Home Goals</td>
-<td style="text-align: right;">3720</td>
-<td style="text-align: right;">0.19</td>
-<td style="text-align: right;">0.71</td>
-<td style="text-align: right;">0.94</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0.00</td>
-<td style="text-align: right;">0.0</td>
-<td style="text-align: right;">1.0</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: left;">▇▁▁▁▁</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Half-time Away Goals</td>
-<td style="text-align: right;">3720</td>
-<td style="text-align: right;">0.19</td>
-<td style="text-align: right;">0.43</td>
-<td style="text-align: right;">0.69</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0.00</td>
-<td style="text-align: right;">0.0</td>
-<td style="text-align: right;">1.0</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: left;">▇▁▁▁▁</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">RoundID</td>
-<td style="text-align: right;">3720</td>
-<td style="text-align: right;">0.19</td>
-<td style="text-align: right;">10661772.59</td>
-<td style="text-align: right;">27296131.70</td>
-<td style="text-align: right;">201</td>
-<td style="text-align: right;">262.00</td>
-<td style="text-align: right;">337.0</td>
-<td style="text-align: right;">249722.0</td>
-<td style="text-align: right;">97410600</td>
-<td style="text-align: left;">▇▁▁▁▁</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">MatchID</td>
-<td style="text-align: right;">3720</td>
-<td style="text-align: right;">0.19</td>
-<td style="text-align: right;">61346867.55</td>
-<td style="text-align: right;">111057171.67</td>
-<td style="text-align: right;">25</td>
-<td style="text-align: right;">1188.75</td>
-<td style="text-align: right;">2191.0</td>
-<td style="text-align: right;">43950059.2</td>
-<td style="text-align: right;">300186515</td>
-<td style="text-align: left;">▇▁▁▁▂</td>
-</tr>
-</tbody>
-</table>
+<pre><code>Rows: 4,572
+Columns: 20
+$ Year                   &lt;dbl&gt; 1930, 1930, 1930, 1930, 1930, 1930, 1930, 1930,…
+$ Datetime               &lt;chr&gt; &quot;13 Jul 1930 - 15:00&quot;, &quot;13 Jul 1930 - 15:00&quot;, &quot;…
+$ Stage                  &lt;chr&gt; &quot;Group 1&quot;, &quot;Group 4&quot;, &quot;Group 2&quot;, &quot;Group 3&quot;, &quot;Gr…
+$ Stadium                &lt;chr&gt; &quot;Pocitos&quot;, &quot;Parque Central&quot;, &quot;Parque Central&quot;, …
+$ City                   &lt;chr&gt; &quot;Montevideo&quot;, &quot;Montevideo&quot;, &quot;Montevideo&quot;, &quot;Mont…
+$ `Home Team Name`       &lt;chr&gt; &quot;France&quot;, &quot;USA&quot;, &quot;Yugoslavia&quot;, &quot;Romania&quot;, &quot;Arge…
+$ `Home Team Goals`      &lt;dbl&gt; 4, 3, 2, 3, 1, 3, 4, 3, 1, 1, 6, 4, 1, 4, 3, 6,…
+$ `Away Team Goals`      &lt;dbl&gt; 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 1,…
+$ `Away Team Name`       &lt;chr&gt; &quot;Mexico&quot;, &quot;Belgium&quot;, &quot;Brazil&quot;, &quot;Peru&quot;, &quot;France&quot;…
+$ `Win conditions`       &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+$ Attendance             &lt;dbl&gt; 4444, 18346, 24059, 2549, 23409, 9249, 18306, 1…
+$ `Half-time Home Goals` &lt;dbl&gt; 3, 2, 2, 1, 0, 1, 0, 2, 0, 0, 3, 1, 1, 4, 2, 1,…
+$ `Half-time Away Goals` &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0,…
+$ Referee                &lt;chr&gt; &quot;LOMBARDI Domingo (URU)&quot;, &quot;MACIAS Jose (ARG)&quot;, …
+$ `Assistant 1`          &lt;chr&gt; &quot;CRISTOPHE Henry (BEL)&quot;, &quot;MATEUCCI Francisco (U…
+$ `Assistant 2`          &lt;chr&gt; &quot;REGO Gilberto (BRA)&quot;, &quot;WARNKEN Alberto (CHI)&quot;,…
+$ RoundID                &lt;dbl&gt; 201, 201, 201, 201, 201, 201, 201, 201, 201, 20…
+$ MatchID                &lt;dbl&gt; 1096, 1090, 1093, 1098, 1085, 1095, 1092, 1097,…
+$ `Home Team Initials`   &lt;chr&gt; &quot;FRA&quot;, &quot;USA&quot;, &quot;YUG&quot;, &quot;ROU&quot;, &quot;ARG&quot;, &quot;CHI&quot;, &quot;YUG&quot;…
+$ `Away Team Initials`   &lt;chr&gt; &quot;MEX&quot;, &quot;BEL&quot;, &quot;BRA&quot;, &quot;PER&quot;, &quot;FRA&quot;, &quot;MEX&quot;, &quot;BOL&quot;…</code></pre>
 </div>
 </div>
 </section>
@@ -3667,6 +3110,28 @@ Github Repo Link
 <h1>Cleaning the Data</h1>
 <p>I noticed that the team name Germany was coded both as Germany and also Germany FR. After investigating the meaning of this, I realized that Germany FR was West Germany before the country was reunified. I decided to recode Germany FR as Germany, since that is how the country is considered today, and their overall world cup wins are measured for the country as a whole officially.</p>
 <div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4,572 × 29
+    Year Datetime         Stage Stadium City  `Home Team Name` `Home Team Goals`
+   &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;                        &lt;dbl&gt;
+ 1  1930 13 Jul 1930 - 1… Grou… Pocitos Mont… France                           4
+ 2  1930 13 Jul 1930 - 1… Grou… Parque… Mont… USA                              3
+ 3  1930 14 Jul 1930 - 1… Grou… Parque… Mont… Yugoslavia                       2
+ 4  1930 14 Jul 1930 - 1… Grou… Pocitos Mont… Romania                          3
+ 5  1930 15 Jul 1930 - 1… Grou… Parque… Mont… Argentina                        1
+ 6  1930 16 Jul 1930 - 1… Grou… Parque… Mont… Chile                            3
+ 7  1930 17 Jul 1930 - 1… Grou… Parque… Mont… Yugoslavia                       4
+ 8  1930 17 Jul 1930 - 1… Grou… Parque… Mont… USA                              3
+ 9  1930 18 Jul 1930 - 1… Grou… Estadi… Mont… Uruguay                          1
+10  1930 19 Jul 1930 - 1… Grou… Estadi… Mont… Chile                            1
+# ℹ 4,562 more rows
+# ℹ 22 more variables: `Away Team Goals` &lt;dbl&gt;, `Away Team Name` &lt;chr&gt;,
+#   `Win conditions` &lt;chr&gt;, Attendance.x &lt;dbl&gt;, `Half-time Home Goals` &lt;dbl&gt;,
+#   `Half-time Away Goals` &lt;dbl&gt;, Referee &lt;chr&gt;, `Assistant 1` &lt;chr&gt;,
+#   `Assistant 2` &lt;chr&gt;, RoundID &lt;dbl&gt;, MatchID &lt;dbl&gt;,
+#   `Home Team Initials` &lt;chr&gt;, `Away Team Initials` &lt;chr&gt;, Country &lt;chr&gt;,
+#   Winner &lt;chr&gt;, `Runners-Up` &lt;chr&gt;, Third &lt;chr&gt;, Fourth &lt;chr&gt;, …</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 2
   Winner        n
@@ -3697,22 +3162,8 @@ Github Repo Link
 </div>
 </div>
 </section>
-<section id="analysis-1" class="level1">
-<h1>Analysis 1</h1>
-<p>Performance trend in top 4 teams that have won the most world cup matches over time</p>
-<p>explore the data, missingness, univariate, bivariate, multivariate analysis</p>
-</section>
-<section id="example-join" class="level1">
-<h1>Example join:</h1>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>  Year     Match      Team Score   Host  Winner
-1 2018     Final    France     4 Russia  France
-2 2018 Semifinal   Croatia     2 Russia  France
-3 2014     Final   Germany     1 Brazil Germany
-4 2014 Semifinal Argentina     0 Brazil Germany</code></pre>
-</div>
-</div>
+<section id="summary-of-progress" class="level1">
+<h1>Summary of Progress</h1>
 </section>
 
 </main>

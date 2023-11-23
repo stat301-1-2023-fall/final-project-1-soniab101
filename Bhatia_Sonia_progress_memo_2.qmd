@@ -30,13 +30,21 @@ My github link is below.
 
 :::
 
-##Load in Data and Packages
+::: {.callout-tip icon=false}
+
+## Link to kaggle dataset (citation)
+
+[World Cups and World Cup Matches datasets](https://www.kaggle.com/datasets/abecklas/fifa-world-cup?select=WorldCups.csv)
+
+:::
+
+
 ```{r}
 library(tidyverse)
 library(skimr)
-WorldCupMatches <- read_csv("data/WorldCupMatches.csv")
-WorldCupPlayers <- read_csv("data/WorldCupPlayers.csv")
-WorldCups <- read_csv("data/WorldCups.csv")
+WorldCupMatchesCleaned <- read_csv("data/WorldCupMatchesCleaned.csv")
+WorldCupsCleaned <- read_csv("data/WorldCupsCleaned.csv")
+Cups_Matches_joined <- read_csv("data/Cups_Matches_joined.csv")
 
 ```
 
@@ -54,7 +62,7 @@ glimpse(WorldCupMatches)
 ```
 
 # Cleaning the Data
-I noticed that the team name Germany was coded both as Germany and also Germany FR. After investigating the meaning of this, I realized that Germany FR was West Germany before the country was reunified. I decided to recode Germany FR as Germany, since that is how the country is considered today, and their overall world cup wins are measured for the country as a whole officially. 
+I noticed that the team name Germany was coded both as Germany and also Germany FR. After investigating the meaning of this, I realized that Germany FR was West Germany before the country was reunified. I decided to recode Germany FR as Germany, since that is how the country is considered today, and their overall world cup wins are measured for the country as a whole officially. Additionally, I parsed the Datetime variable in the World Cup Matches dataset, and turned it into a date object. Also, in the merged dataset, I cleaned the 'attendance' variable names, since they were present in both separate datasets originally and represented different values. 
 
 ```{r}
 WorldCupsCleaned <- mutate_if(WorldCups,
@@ -65,11 +73,9 @@ WorldCupMatchesCleaned <- mutate_if(WorldCupMatches,
                                 is.character,
                                 stringr::str_replace_all, pattern = "Germany FR", replacement = "Germany")
 
-join <- WorldCupMatchesCleaned |> left_join(WorldCupsCleaned, by = "Year")
-join
 
 
-WorldCupsCleaned  |>  summarize(n=n(),.by=Winner) 
+
 
 ```
 
@@ -77,8 +83,6 @@ WorldCupsCleaned  |>  summarize(n=n(),.by=Winner)
 # Univariate Analysis
 I am investigating the distribution of the number of World Cups each of these countries has won.
 ```{r}
-
-# WorldCupsCleaned  |>  mutate(n=n(),.by=Winner) |> select(Winner, n)
 
 WorldCupsCleaned |> ggplot(aes(x= Winner)) + geom_bar(fill = "deepskyblue3") + labs(
   title = "Distribution of World Cup Wins by Country", x = "Country", y = "Total Wins")
@@ -90,43 +94,18 @@ WorldCupsCleaned |> ggplot(aes(x= Winner)) + geom_bar(fill = "deepskyblue3") + l
 #Bivariate Analysis
 I am exploring the 
 ```{r}
-WorldCupsCleaned |> ggplot(aes(x=Year,y=GoalsScored)) + geom_line(color = "darkorchid") + labs(title = "Total Goals Scored in the World Cup over the Years", x = "Year", y = "Total Goals")
+#| label: fig-sub-regions-bar
+#| fig-cap: Information on the trend of total goals scored in the World Cup since 1930
+WorldCupsCleaned |> ggplot(aes(x=Year,y=GoalsScored)) +
+  geom_line(color = "darkorchid") +
+  theme(axis.text.x = element_text(angle = 45)) +
+  labs(title = "Total Goals Scored in the World Cup over the Years", x = "Year", y = "Total Goals", caption = "Source: Fifa World Cup Archive")
 ```
 
 
 # Summary of Progress
 
 
-# Analysis 1
-Performance trend in top 4 teams that have won the most world cup matches over time
-
-explore the data, missingness, univariate, bivariate, multivariate analysis
-
-```{r}
-
-```
 
 
-# Example join:
-```{r}
-# Example data frames
-world_cup_matches <- data.frame(
-  Year = c(2018, 2018, 2014, 2014),
-  Match = c("Final", "Semifinal", "Final", "Semifinal"),
-  Team = c("France", "Croatia", "Germany", "Argentina"),
-  Score = c(4, 2, 1, 0)
-)
-
-world_cups <- data.frame(
-  Year = c(2018, 2014),
-  Host = c("Russia", "Brazil"),
-  Winner = c("France", "Germany")
-)
-
-# Perform a left join based on the "Year" column
-merged_data <- left_join(world_cup_matches, world_cups, by = "Year")
-
-# Print the merged data
-print(merged_data)
-```
 

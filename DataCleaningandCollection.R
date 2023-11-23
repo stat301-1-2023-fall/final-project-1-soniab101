@@ -2,8 +2,16 @@ library(tidyverse)
 library(naniar)
 library(sjlabelled)
 library(sjmisc)
+install.packages("kableExtra")
+library(kableExtra)
+library(lubridate)
 
 # cleaning the data:
+
+glimpse(WorldCupMatches)
+glimpse(WorldCups)
+
+#recoding the Germany value
 WorldCupsCleaned <- mutate_if(WorldCups,
                               is.character,
                               stringr::str_replace_all, pattern = "Germany FR", replacement = "Germany")
@@ -11,6 +19,59 @@ WorldCupsCleaned <- mutate_if(WorldCups,
 WorldCupMatchesCleaned <- mutate_if(WorldCupMatches,
                                     is.character,
                                     stringr::str_replace_all, pattern = "Germany FR", replacement = "Germany")
+
+WorldCupsCleaned  |>  summarize(n=n(),.by=Winner) 
+
+#making datetime var into a date object
+WorldCupMatchesCleaned <- WorldCupMatchesCleaned  %>%
+  mutate(Datetime = dmy_hm(Datetime))
+
+
+
+# merging the World Cups Matches and World Cups datasets
+Cups_Matches_joined <- WorldCupMatchesCleaned |> left_join(WorldCupsCleaned, by = "Year")
+
+
+
+# renaming the var names that have spaces
+Cups_Matches_joined <- Cups_Matches_joined |> 
+  rename("Home_Team_Name" = `Home Team Name`,
+         "Away_Team_Name" = `Away Team Name`,
+         "Win_Conditions" = `Win conditions`,
+         "Half-time_Home_Goals" = `Half-time Home Goals`,
+         "Half-time_Away_Goals" = `Half-time Away Goals`,
+         "Home_Team_Goals" = `Home Team Goals`,
+         "Away_Team_Goals" = `Away Team Goals`,
+         "Assistant_1" = `Assistant 1`,
+         "Assistant_2" = `Assistant 2`,
+         "Home_Team_Initials" = `Home Team Initials`,
+         "Away_Team_Initials" = `Away Team Initials`,
+         "Match_Attendance" = `Attendance.x`,
+         "Total_Attendance_of_WC" = `Attendance.y`)
+
+WorldCupMatchesCleaned <- WorldCupMatchesCleaned |> 
+  rename("Home_Team_Name" = `Home Team Name`,
+         "Away_Team_Name" = `Away Team Name`,
+         "Win_Conditions" = `Win conditions`,
+         "Half-time_Home_Goals" = `Half-time Home Goals`,
+         "Half-time_Away_Goals" = `Half-time Away Goals`,
+         "Home_Team_Goals" = `Home Team Goals`,
+         "Away_Team_Goals" = `Away Team Goals`,
+         "Assistant_1" = `Assistant 1`,
+         "Assistant_2" = `Assistant 2`,
+         "Home_Team_Initials" = `Home Team Initials`,
+         "Away_Team_Initials" = `Away Team Initials`)
+
+Cups_Matches_joined <- subset(Cups_Matches_joined, select = -c(...1.x,...1.y))
+
+write.csv(WorldCupsCleaned, "data/WorldCupsCleaned.csv")
+write.csv(WorldCupMatchesCleaned, "data/WorldCupMatchesCleaned.csv")
+write.csv(Cups_Matches_joined, "data/Cups_Matches_joined.csv")
+
+# investigating the data
+glimpse(Cups_Matches_joined)
+str(Cups_Matches_joined)
+sum<- summary(Cups_Matches_joined)
 
 
 
@@ -63,3 +124,16 @@ matches_data_codebook <- tibble(
                    "Unique ID of the match",
                    "Home team country's three letter initials",
                    "Away team country's three letter initials"))
+
+
+wc_codebook <- wc_data_codebook %>%
+  kbl() %>%
+  kable_styling()
+
+wc_codebook
+
+wc_match_codebook <- matches_data_codebook %>%
+  kbl() %>%
+  kable_styling()
+
+wc_match_codebook
