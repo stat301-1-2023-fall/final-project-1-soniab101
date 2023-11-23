@@ -62,11 +62,26 @@ WorldCupMatchesCleaned <- WorldCupMatchesCleaned |>
          "Home_Team_Initials" = `Home Team Initials`,
          "Away_Team_Initials" = `Away Team Initials`)
 
-Cups_Matches_joined <- subset(Cups_Matches_joined, select = -c(...1.x,...1.y))
+Cups_Matches_joined <- Cups_Matches_joined |> 
+  rename("Match_Attendance" = `Attendance.x`,
+"Total_Attendance_of_WC" = `Attendance.y`)
+
+Cups_Matches_joined <- subset(Cups_Matches_joined, select = -c(...1))
+WorldCupsCleaned <- subset(WorldCupsCleaned, select = -c(...1,...2))
+WorldCupMatchesCleaned <- subset(WorldCupMatchesCleaned, select = -c(...1,...2))
+
+# fix coding of attendance variable
+WorldCupsCleaned <- WorldCupsCleaned |> 
+  mutate(Attendance = c(590549, 363000  ,375700,1045246, 768607,819810,893172,  
+                        1563135, 1603975, 1865753, 1545791, 2109723, 2394031,
+                        2516215,3587538, 2785100 ,2705197, 3359439, 3178856, 3386810))
+
+WorldCupMatchesCleaned <- WorldCupMatchesCleaned[-c(853:4572), ]
 
 write.csv(WorldCupsCleaned, "data/WorldCupsCleaned.csv")
 write.csv(WorldCupMatchesCleaned, "data/WorldCupMatchesCleaned.csv")
 write.csv(Cups_Matches_joined, "data/Cups_Matches_joined.csv")
+
 
 # investigating the data
 glimpse(Cups_Matches_joined)

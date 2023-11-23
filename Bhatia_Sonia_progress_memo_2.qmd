@@ -41,71 +41,125 @@ My github link is below.
 
 ```{r}
 library(tidyverse)
-library(skimr)
+library(naniar)
+library(vtable)
+WorldCups <- read_csv("data/raw/WorldCups.csv")
+WorldCupMatches <- read_csv("data/raw/WorldCupMatches.csv")
 WorldCupMatchesCleaned <- read_csv("data/WorldCupMatchesCleaned.csv")
 WorldCupsCleaned <- read_csv("data/WorldCupsCleaned.csv")
 Cups_Matches_joined <- read_csv("data/Cups_Matches_joined.csv")
 
 ```
 
-# summary of the datasets
+## Introduction
+These datasets about the Fifa World Cup are interesting to me since I enjoy watching soccer matches, especially the world cup. One dataset contains overall information on the World Cup held every four years, and the other contains specific information about each match held in each World Cup. I believe there are many conclusions that can be drawn from this data, and many interesting questions that can be explored. Some questions I am interested in investigating are if there is any correlation between a team playing a match in their home country and whether that gives them an advantage in winning or not. I am also interested in the differences between viewership of matches.
 
-# Investigating the data:
-```{r}
-glimpse(WorldCups)
-glimpse(WorldCupMatches)
-
-#skim(WorldCups)
-#skim(WorldCupMatches)
-
-
-```
-
-# Cleaning the Data
-I noticed that the team name Germany was coded both as Germany and also Germany FR. After investigating the meaning of this, I realized that Germany FR was West Germany before the country was reunified. I decided to recode Germany FR as Germany, since that is how the country is considered today, and their overall world cup wins are measured for the country as a whole officially. Additionally, I parsed the Datetime variable in the World Cup Matches dataset, and turned it into a date object. Also, in the merged dataset, I cleaned the 'attendance' variable names, since they were present in both separate datasets originally and represented different values. 
+## Data Overview & Quality
+There are 20 variables in the WorldCupMatches dataset, 10 of which are categorical and 10 are numerical. There are 10 variables in the WorldCups dataset, 5 of which are categorical and 5 are numerical. After investigating the missingess of each dataset, as shown below, I saw that there was no missing data in the WorldCups dataset. However, surprisingly, I learned that a large portion of the data (81%) was shown to be missing. After reading more into this, I realized that there were many rows solely containing NA values added on to the end of the dataset, and I was able to delete these. Currently, there is only missing values for one variable (win_conditions), as shown below.
 
 ```{r}
-WorldCupsCleaned <- mutate_if(WorldCups,
-                                is.character,
-                                stringr::str_replace_all, pattern = "Germany FR", replacement = "Germany")
-
-WorldCupMatchesCleaned <- mutate_if(WorldCupMatches,
-                                is.character,
-                                stringr::str_replace_all, pattern = "Germany FR", replacement = "Germany")
-
-
-
-
-
+vis_miss(WorldCupsCleaned)
+vis_miss(WorldCupMatchesCleaned)
 ```
+
+
+## Summary of the datasets
+```{r}
+st(WorldCupsCleaned, vars = c("Year","GoalsScored","QualifiedTeams","MatchesPlayed","Attendance"))
+
+st(WorldCupMatchesCleaned, vars = 
+     c("Year", "Home_Team_Goals","Away_Team_Goals", "Attendance"))
+```
+I wanted to investigate some summary statistics of the numerical variables in each dataset. Something that stood out to me was the wide range of the total matches played in the world cup (42 - 64) which has definitely increased over time. I was also surprised at how high the mean total attendance was at the world cups.
+
+# Data Cleaning
+I noticed that the team name Germany was coded both as Germany and also Germany FR. After investigating the meaning of this, I realized that Germany FR was West Germany before the country was reunified. I decided to recode Germany FR as Germany, since that is how the country is considered today, and their overall world cup wins are measured for the country as a whole officially. Additionally, I parsed the Datetime variable in the World Cup Matches dataset, and turned it into a date object. Also, I renamed many of the variable names that contained a space in them. I needed to recode the attendance variable in the WorldCups dataset, as it was a character variable rather than a numerical one. 
+
+
 
 
 # Univariate Analysis
-I am investigating the distribution of the number of World Cups each of these countries has won.
-```{r}
+I am investigating two variables in this section: Winner, which tells us which country won the World Cup that year, and GoalsScored, which tells us the total number of goals scored that World Cup. I believe these variables are important to fully understanding the data, as they tell us a lot about the performance of different countries and how the overall performance of teams has improved over the years. 
 
-WorldCupsCleaned |> ggplot(aes(x= Winner)) + geom_bar(fill = "deepskyblue3") + labs(
-  title = "Distribution of World Cup Wins by Country", x = "Country", y = "Total Wins")
+
+
+```{r}
+#| label: fig-sub-regions-bar1
+#| fig-cap: Information on the number of times certain countries have won the world cup
+
+# Univariate analysis of Winner var in WorldCupsCleaned dataset
+WorldCupsCleaned |> ggplot(aes(x= Winner)) + 
+  geom_bar(fill = "deepskyblue3") + 
+  theme(axis.text.x = element_text(angle = 45)) +
+  labs(title = "Distribution of World Cup Wins by Country", x = "Country", y = "Total Wins",caption = "Source: Fifa World Cup Archive")
+
+
 
 ```
+I was able to investigate the distribution of World Cup Wins through this bar plot, and see that Brazil has the highest number of wins of 5, with Germany and Italy tied at 4 wins. 
 
 
 
-#Bivariate Analysis
-I am exploring the 
+
 ```{r}
-#| label: fig-sub-regions-bar
+#| label: fig-sub-regions-bar2
+#| fig-cap: Information on the goals scored at the World Cup
+
+#Univariate analysis of GoalsScored var in WorldCupsCleaned dataset
+totalgoals_plot<- WorldCupsCleaned |> 
+  ggplot(aes(x= GoalsScored)) + 
+  geom_histogram(color = "white", fill = "coral1", bins = 10) + 
+  theme(axis.text.x = element_text(angle = 45)) +
+  labs(title = "Distribution of Total Goals Scored in Each World Cup", 
+       x = "Number of Goals", y = "Frequency",
+       caption = "Source: Fifa World Cup Archive")
+
+totalgoals_plot
+```
+I was able to explore the total Goals Scored per World Cup and was surprised to learn that it has a very symmetrical distribution. World Cups with goals scored between about 85-95 and 140-152 goals had the highest frequency.
+
+
+
+# Bivariate Analysis
+I am exploring the relationships between the variables years vs attendance per world cup and years vs total goals scored at that World Cup to get a better understanding of these variables. I think it is important to understand the relationship of these variables with years, as we can see how the trend has changed over time and can create hypotheses as to what is driving these trends. 
+
+
+
+```{r}
+#| label: fig-sub-regions-bar3
+#| fig-cap: Information on the trend of attendance at the World Cup since 1930
+
+# Years vs Attendance for World Cup
+
+WorldCupsCleaned |> ggplot(aes(x = Year, y = Attendance)) + 
+  geom_line(color = "magenta") + 
+  theme(axis.text.x = element_text(angle = 45)) +
+  labs(title = "Total Attendance at Each World Cup Over Since 1930", 
+       x = "Year", y = "Total Attendance", caption = "Source: Fifa World Cup Archive")
+
+
+```
+I was able to see that the total attendance has greatly increased over the years since 1930, but does not always consistently increase. There is occasionally a slight decrease between years, such as between 1998 and 2002. 
+
+
+```{r}
+#| label: fig-sub-regions-bar4
 #| fig-cap: Information on the trend of total goals scored in the World Cup since 1930
-WorldCupsCleaned |> ggplot(aes(x=Year,y=GoalsScored)) +
+
+# Bivariate analysis of GoalsScored and Year vars in WorldCupsCleaned dataset
+years_goals_scored_plot <- WorldCupsCleaned |> ggplot(aes(x=Year,y=GoalsScored)) +
   geom_line(color = "darkorchid") +
   theme(axis.text.x = element_text(angle = 45)) +
   labs(title = "Total Goals Scored in the World Cup over the Years", x = "Year", y = "Total Goals", caption = "Source: Fifa World Cup Archive")
+
+
+years_goals_scored_plot
+
 ```
+From this plot, I was able to learn more about the trend of total goals scored at the world up over the years, and see how over time, the total number of goals has greatly increased. However, it does not consistently increase, with large drops of around 30 goals every couple of years. 
 
-
-# Summary of Progress
-
-
+# Progress and Conclusion
+I believe I have made great progress in my exploration and analysis of this data, and have gained insights into the relationships between different variables. After investigating the data, I was able to determine which variable names and values needed cleaning, and made the data a lot more organized. Additionally, I learned more about variables such as attendance and goals scored, and how these variables have changed over time. This has helped guide me towards forming my overall research questions, which relate to learning about how the attendance of World Cup matches varies based on which country the match is held in.
 
 
 
