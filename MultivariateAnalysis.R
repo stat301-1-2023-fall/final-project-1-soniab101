@@ -43,3 +43,33 @@ ggplot(aes(x= Country, y = Match_Attendance)) +
 ggsave("plots/country_atten.png")
 
 country_atten_plot
+
+
+# Creating a yr, home, home pts dataset
+
+data1 <- Cups_Matches_joined |>  select(-c("Away_Team_Goals", "Away_Team_Name"))
+data1 <- data1 |> rename("Team_Goals" = "Home_Team_Goals", "Team_Name" = "Home_Team_Name")
+
+data2 <- Cups_Matches_joined |>  select(-c("Home_Team_Goals", "Home_Team_Name"))
+data2 <- data2 |> rename("Team_Goals" = "Away_Team_Goals", "Team_Name" = "Away_Team_Name")
+
+binded_team_goals <- rbind(data1, data2)
+binded_team_goals <- binded_team_goals |> arrange(Year)
+
+goals_bycountry_perWC <- binded_team_goals |> group_by(Year, Team_Name) |> 
+  summarize(total_goals = sum(Team_Goals, na.rm = TRUE))
+
+goals_bycountry_perWC |> slice_max(total_goals, n=6)
+
+
+
+goals_bycountry_plot <- goals_bycountry_perWC |> slice_max(total_goals, n=6) |> 
+  ggplot(aes(x=Team_Name, y=total_goals)) + geom_boxplot()
+
+goals_year_bycountry_plot <- binded_team_goals |> summarize(total_goals = sum(Team_Goals)) |> filter("Team_Name" == "Argentina") |> 
+  ggplot(aes(x=Year, y= Team_Goals)) +
+  geom_line() 
+
+goals_year_bycountry_plot
+
+
