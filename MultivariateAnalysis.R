@@ -62,14 +62,63 @@ goals_bycountry_perWC <- binded_team_goals |> group_by(Year, Team_Name) |>
 goals_bycountry_perWC |> slice_max(total_goals, n=6)
 
 
+# Top scoring countries total goals for the 6 most recent world cups
+countrygoals_recentWC_plot <- goals_bycountry_perWC |> 
+  filter(Year %in% c(1994, 1998, 2002, 2006, 2010, 2014)) |> 
+  filter(Team_Name %in% c("Argentina", "Brazil", "Germany", "Italy")) |> 
+  ggplot(aes(x=Team_Name, y = total_goals, fill = Team_Name)) + 
+  geom_col(show.legend = FALSE) + 
+  facet_wrap(~factor(Year)) +
+  labs(title = "Each Country's Total Goals per World Cup",
+       subtitle = "For the World Cups Between 1994 - 2014",
+       x = "Country",
+       y = "Total Goals") +
+  theme(plot.title = element_text(hjust = 0.5, size = 15, face = "bold"), 
+        plot.subtitle = element_text(hjust = 0.5, size = 10), 
+        axis.title.x = element_text(hjust = 0.5, size = 10, face = "bold"),
+        axis.title.y = element_text(hjust = 0.5, size = 10, face = "bold")) +
+  theme_linedraw()
+
+countrygoals_recentWC_plot
+ggsave("plots/countrygoals_recentWC_plot.png")
+
+
 
 goals_bycountry_plot <- goals_bycountry_perWC |> slice_max(total_goals, n=6) |> 
   ggplot(aes(x=Team_Name, y=total_goals)) + geom_boxplot()
 
-goals_year_bycountry_plot <- binded_team_goals |> summarize(total_goals = sum(Team_Goals)) |> filter("Team_Name" == "Argentina") |> 
+goals_year_bycountry_plot <- binded_team_goals |> 
+  summarize(total_goals = sum(Team_Goals)) |> filter("Team_Name" == "Argentina") |> 
   ggplot(aes(x=Year, y= Team_Goals)) +
   geom_line() 
 
 goals_year_bycountry_plot
+
+
+# Total attendance by WC country host
+
+# change countries that have hosted multiple times to be coded slightly differently
+WorldCupsCleaned1<- WorldCupsCleaned
+WorldCupsCleaned1$Country[20] <- 'Brazil1'
+WorldCupsCleaned1$Country[14] <- 'Italy1'
+WorldCupsCleaned1$Country[16] <- 'France1'
+WorldCupsCleaned1$Country[18] <- 'Germany1'
+WorldCupsCleaned1$Country[13] <- 'Mexico1'
+
+country1 <- WorldCupsCleaned$Country
+WorldCupsCleaned1$Country1 <- country1
+
+WC_country_attendance <- WorldCupsCleaned1 |> ggplot(aes(x= Country, y= Attendance, fill = Country1)) + 
+  geom_col() + 
+  geom_text(aes(label = Year), vjust = 1.5, colour = "white") +
+  labs(title = "Total World Cup Attendance By Host Country",
+       subtitle = "Countries that have hosted twice are adjacent by year they hosted",
+       x = "Host Country",
+       y = "Total Attendance") + 
+  theme(axis.text.x = element_text(angle = 45)) 
+
+WC_country_attendance
+
+ggsave("plots/WC_country_attendance.png")
 
 
