@@ -2,6 +2,7 @@ library(tidyverse)
 library(naniar)
 install.packages("kableExtra")
 library(kableExtra)
+library(forcats)
 
 WorldCupMatchesCleaned <- read_csv("data/WorldCupMatchesCleaned.csv")
 WorldCupsCleaned <- read_csv("data/WorldCupsCleaned.csv")
@@ -120,5 +121,34 @@ WC_country_attendance <- WorldCupsCleaned1 |> ggplot(aes(x= Country, y= Attendan
 WC_country_attendance
 
 ggsave("plots/WC_country_attendance.png")
+
+
+
+# Investigating the match attendance at different stages of the world cup
+stages_attendance_df <- Cups_Matches_joined 
+stages_attendance_df <- stages_attendance_df |> 
+  mutate(Stage = if_else(Stage %in% c("Quarter-finals", 
+                                      "Semi-finals",
+                                      "Match for third place",
+                                      "Final"), Stage, "Early round"
+                         ))
+    
+stages_attendance_df <- stages_attendance_df |> 
+  mutate(Stage = factor(Stage,
+                        levels = c("Early round", 
+                                   "Quarter-finals",
+                                   "Match for third place",
+                                   "Semi-finals",
+                                   "Final")))
+
+stages_attendance_df <- stages_attendance_df |> 
+  mutate(Stage = fct_relevel(Stage, levels = c("Early round", 
+                                               "Quarter-finals",
+                                               "Match for third place",
+                                               "Semi-finals",
+                                               "Final")))
+
+stages_attendance_df |> ggplot(aes(x=Stage, y = Match_Attendance)) +
+  geom_boxplot()
 
 
