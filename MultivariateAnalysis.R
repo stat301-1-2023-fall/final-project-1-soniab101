@@ -3,11 +3,17 @@ library(naniar)
 install.packages("kableExtra")
 library(kableExtra)
 library(forcats)
+library(RColorBrewer)
 
+
+# read in data
 WorldCupMatchesCleaned <- read_csv("data/WorldCupMatchesCleaned.csv")
 WorldCupsCleaned <- read_csv("data/WorldCupsCleaned.csv")
 Cups_Matches_joined <- read_csv("data/Cups_Matches_joined.csv")
+goals_bycountry_perWC <- read_csv("data/goals_bycountry_perWC.csv")
 
+
+# analysis
 
 # Years vs Attendance for World Cup
 
@@ -62,6 +68,8 @@ goals_bycountry_perWC <- binded_team_goals |> group_by(Year, Team_Name) |>
 
 goals_bycountry_perWC |> slice_max(total_goals, n=6)
 
+#save goals_bycountry_perWC to data folder
+write_csv(goals_bycountry_perWC, "data/goals_bycountry_perWC.csv")
 
 # Top scoring countries total goals for the 6 most recent world cups
 countrygoals_recentWC_plot <- goals_bycountry_perWC |> 
@@ -148,7 +156,17 @@ stages_attendance_df <- stages_attendance_df |>
                                                "Semi-finals",
                                                "Final")))
 
-stages_attendance_df |> ggplot(aes(x=Stage, y = Match_Attendance)) +
-  geom_boxplot()
+
+stages_attendance_df |> ggplot(aes(x=Stage, y = Match_Attendance, fill = Stage)) +
+  geom_boxplot() + theme_minimal() + scale_color_gradient() +
+  labs(title = "Distribution of Match Attendance by Round of the World Cup",
+       subtitle = "All rounds before the Quarter-finals are considered an early round",
+       x = "Round",
+       y = "Attendance") +
+  theme(plot.title = element_text(hjust = 0.5, size = 15, face = "bold"), 
+        plot.subtitle = element_text(hjust = 0.5, size = 10), 
+        axis.title.x = element_text(hjust = 0.5, size = 10, face = "bold"),
+        axis.text.x = element_text(angle = 45),
+        axis.title.y = element_text(hjust = 0.5, size = 10, face = "bold")) 
 
 

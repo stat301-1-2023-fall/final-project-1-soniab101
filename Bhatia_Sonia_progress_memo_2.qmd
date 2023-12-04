@@ -54,6 +54,7 @@ Cups_Matches_joined <- read_csv("data/Cups_Matches_joined.csv")
 ## Introduction
 These datasets about the Fifa World Cup are interesting to me since I enjoy watching soccer matches, especially the world cup. One dataset contains overall information on the World Cup held every four years, and the other contains specific information about each match held in each World Cup. I believe there are many conclusions that can be drawn from this data, and many interesting questions that can be explored. Some questions I am interested in investigating are if there is any correlation between a team playing a match in their home country and whether that gives them an advantage in winning or not. I am also interested in the differences between viewership of matches.
 
+
 ## Data Overview & Quality
 There are 20 variables in the WorldCupMatches dataset, 10 of which are categorical and 10 are numerical. There are 10 variables in the WorldCups dataset, 5 of which are categorical and 5 are numerical. After investigating the missingess of each dataset, as shown below, I saw that there was no missing data in the WorldCups dataset. However, surprisingly, I learned that a large portion of the data (81%) was shown to be missing. After reading more into this, I realized that there were many rows solely containing NA values added on to the end of the dataset, and I was able to delete these. Currently, there is only missing values for one variable (win_conditions), as shown below.
 
@@ -156,7 +157,7 @@ years_goals_scored_plot <- WorldCupsCleaned |> ggplot(aes(x=Year,y=GoalsScored))
 years_goals_scored_plot
 
 ```
-From this plot, I was able to learn more about the trend of total goals scored at the world up over the years, and see how over time, the total number of goals has greatly increased. However, it does not consistently increase, with large drops of around 30 goals every couple of years. 
+From this plot, I was able to learn more about the trend of total goals scored at the world up over the years, and see how over time, the total number of goals has greatly increased. However, it does not consistently increase, with large drops of around 30 goals every couple of years. This could  
 
 # Progress and Conclusion
 I believe I have made great progress in my exploration and analysis of this data, and have gained insights into the relationships between different variables. After investigating the data, I was able to determine which variable names and values needed cleaning, and made the data a lot more organized. Additionally, I learned more about variables such as attendance and goals scored, and how these variables have changed over time. This has helped guide me towards forming my overall research questions, which relate to learning about how the attendance of World Cup matches varies based on which country the match is held in.
