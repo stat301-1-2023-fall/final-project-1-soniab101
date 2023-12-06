@@ -111,18 +111,19 @@ This section helped me to answer one my main research question of interest relat
 ![Distribution of Match Attendance](plots/match_atten_dist_plot.png){#fig-bar1}
 
 ### Match Attendance of Certain Countries
-Next, I wanted to know how the match attendance was distributed for certain teams. I was interested to see if more people attended matches when certain countries were playing. I selected the four teams which I enjoy watching play the most, and like to keep up with the players and current team performance. TAKEAWAYS I noticed that the distribution for attendance of team USA's matches has a very tall peak to the left of the other three teams, meaning frequently around 35000 people their matches. The distributions of the match attendance have significant overlap for the countries, telling us that each team had a similar distribution of frequency. 
+Next, I wanted to know how the match attendance was distributed for certain teams. I was interested to see if more people attended matches when certain countries were playing. I selected the four teams which I enjoy watching play the most, and like to keep up with the players and current team performance. I noticed that the distribution for attendance of team USA's matches has a very tall peak to the left of the other three teams, meaning frequently around 35000 people their matches which is less than the average attendances for other teams. I did not find this to be too surprising, as soccer is not as popular of a sport in the US in comparison to the other three countries. Also, other major sports in the US such as American football and baseball are rivals for the US population's interest in sports.The distributions of the match attendance have significant overlap for the countries, telling us that each team had a similar distribution of frequency. 
 
 ![Distribution of Match Attendance for Selected Countries](plots/match_atten_dist_favcountry_plot.png){#fig-bar2}
 
 ### Match Attendance of Top Five Countries
-To continue my analysis, I decided 
+To build on my previous analysis of match attendance for my favorite teams, I decided to investigate the match attendance of the five countries that have won the most World Cups. Figure 3 shows us these distributions. I was surprised to see that the distributions for all five countries were pretty similar. I found it interesting that Brazil had the highest peak out of all the teams, meaning that it had the most consistent match attendance of around 55000 people. Germany has the further right peak, telling us that they have a higher and more concentrated density, so they may consistently have better attendance. 
 
 
 ![Distribution of Match Attendance for Selected Countries](plots/match_atten_dist_top5_plot.png){#fig-bar3}
 
 ### Total Attendance of World Cups Over the Years
-
+Next, I wanted to look through a macro lens and now explore the overall total attendance of World Cups.
+From Figure 4, I was able to see that the total attendance has greatly increased over the years since 1930, from around 600,000 attendees to 3,300,000. This upward slope indicates a growth in total attendance over the years, which could be due to the tournament gaining more attention and popularity over the years as more teams began particpating in it. Additionally, there were peaks around 1950 and 1998, indicating years where there was a sharp increase in attendance. I believe this could be due to factors such as host country popularity, or exciting match lineups. 
 
 ![Distribution of Match Attendance for Selected Countries](plots/years_atten.png){#fig-bar4}
 
