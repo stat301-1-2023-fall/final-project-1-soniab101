@@ -44,6 +44,7 @@ My github link is below.
 library(tidyverse)
 library(naniar)
 library(vtable)
+
 WorldCups <- read_csv("data/raw/WorldCups.csv")
 WorldCupMatches <- read_csv("data/raw/WorldCupMatches.csv")
 WorldCupMatchesCleaned <- read_csv("data/WorldCupMatchesCleaned.csv")
@@ -74,11 +75,12 @@ st(WorldCupMatchesCleaned, vars =
 ```
 I wanted to investigate some summary statistics of the numerical variables in each dataset. Something that stood out to me was the wide range of the total matches played in the world cup (42 - 64) which has definitely increased over time. I was also surprised at how high the mean total attendance was at the world cups.
 
+
 # Data Cleaning
 I noticed that the team name Germany was coded both as Germany and also Germany FR. After investigating the meaning of this, I realized that Germany FR was West Germany before the country was reunified. I decided to recode Germany FR as Germany, since that is how the country is considered today, and their overall world cup wins are measured for the country as a whole officially. Additionally, I parsed the Datetime variable in the World Cup Matches dataset, and turned it into a date object. Also, I renamed many of the variable names that contained a space in them. I needed to recode the attendance variable in the WorldCups dataset, as it was a character variable rather than a numerical one. 
 
-
-
+# Exploration
+Firstly, I wanted to investigate the atte
 
 # Univariate Analysis
 I am investigating two variables in this section: Winner, which tells us which country won the World Cup that year, and GoalsScored, which tells us the total number of goals scored that World Cup. I believe these variables are important to fully understanding the data, as they tell us a lot about the performance of different countries and how the overall performance of teams has improved over the years. 
