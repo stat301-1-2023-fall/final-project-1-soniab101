@@ -119,25 +119,27 @@ Next, I wanted to know how the match attendance was distributed for certain team
 To build on my previous analysis of match attendance for my favorite teams, I decided to investigate the match attendance of the five countries that have won the most World Cups. Figure 3 shows us these distributions. I was surprised to see that the distributions for all five countries were pretty similar. I found it interesting that Brazil had the highest peak out of all the teams, meaning that it had the most consistent match attendance of around 55000 people. Germany has the further right peak, telling us that they have a higher and more concentrated density, so they may consistently have better attendance. 
 
 
-![Distribution of Match Attendance for Selected Countries](plots/match_atten_dist_top5_plot.png){#fig-bar3}
+![Distribution of Match Attendance for Top Five Teams](plots/match_atten_dist_top5_plot.png){#fig-bar3}
+### Match Attendance by the Round of the World Cup
+Next, I wanted to confirm my hypothesis that the round of the World Cup has a correlation with the number of people that attend the match. Figure 4 
+
+
+![Match Attendance vs World Cup Round](plots/stages_atten_plot.png){#fig-bar4}
+
 
 ### Total Attendance of World Cups Over the Years
-Next, I wanted to look through a macro lens and now explore the overall total attendance of World Cups.
-From Figure 4, I was able to see that the total attendance has greatly increased over the years since 1930, from around 600,000 attendees to 3,300,000. This upward slope indicates a growth in total attendance over the years, which could be due to the tournament gaining more attention and popularity over the years as more teams began particpating in it. Additionally, there were peaks around 1950 and 1998, indicating years where there was a sharp increase in attendance. I believe this could be due to factors such as host country popularity, or exciting match lineups. 
+Next, I wanted to look through a macro lens and now explore the overall tol8tal attendance of World Cups.
+From Figurq9ie 4, I was able to see that the total attendance has greatly increased over the years since 1930, from around 600,000 attendees to 3,300,000. This upward slope indicates a growth in total attendance over the years, which could be due to the tournament gaining more attention and popularity over the years as more teams began participating in it. Additionally, there were peaks around 1950 and 1998, indicating years where there was a sharp increase in attendance. I believe this could be due to factors such as host country popularity, or exciting match lineups. 
 
-![Distribution of Match Attendance for Selected Countries](plots/years_atten.png){#fig-bar4}
+![Total Attendance at Each World Cup ](plots/years_atten.png){#fig-bar5}
 
 ### World Cup Attendance For Each Host Country
+My exploration of the trend in overall World Cup attendance motivated me to investigate how the World Cup attendance varies based off of which country is hosting the tournament. I was especially interested in seeing which countries could have been hosting the World Cup during the years of peak attendance that we saw in Figure 4. Figure 5 represents this investigation, by showing us the relationship between the two variables. I was surprised to see that the World Cup hosted by USA had the highest attedance out of all the World Cups thus far, especially since we learned in our earlier analysis that match attendance was lower for team USA in comparison to Argentina, Brazil, and Germany. I believe this may be due to the USA's larger population, resulting in a larger turnout when the tournament is hosted closer. It was also interesting to see that the next 3 countries with the highest attendance are Brazil (when they hosted the second time in 2014), Germany (2006), and South Africa. I did not expect South Africa to have such a high World Cup attendance. It was interesting to see the large increase between the first and second time that certain countries hosted the World Cup.      
 
 
-
-![Distribution of Match Attendance for Selected Countries](plots/WC_country_attendance.png){#fig-bar5}
-
-### Match Attendance by the Round of the World Cup
+![Overall World Cup Attendance By Host Country](plots/WC_country_attendance.png){#fig-bar6}
 
 
-
-![Match Attendance vs World Cup Round](plots/stages_atten_plot.png){#fig-bar6}
 
 # Univariate Analysis
 I am investigating two variables in this section: Winner, which tells us which country won the World Cup that year, and GoalsScored, which tells us the total number of goals scored that World Cup. I believe these variables are important to fully understanding the data, as they tell us a lot about the performance of different countries and how the overall performance of teams has improved over the years. 

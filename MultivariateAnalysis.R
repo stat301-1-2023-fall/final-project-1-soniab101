@@ -5,6 +5,7 @@ library(kableExtra)
 library(forcats)
 library(png)
 
+
 # top 5 countries = 5 countries with the highest number of world cup wins:
 # Brazil, Germany, Italy, Argentina, Uruguay
 
@@ -24,7 +25,7 @@ goals_bycountry_perWC <- read_csv("data/goals_bycountry_perWC.csv")
 years_atten_plot <- WorldCupsCleaned |> ggplot(aes(x = Year, y = Attendance)) + 
   geom_line(color = "magenta") + 
   theme(axis.text.x = element_text(angle = 45)) +
-  labs(title = "Total Attendance at Each World Cup Over Since 1930", 
+  labs(title = "Total Attendance at Each World Cup Since 1930", 
        x = "Year", y = "Total Attendance", caption = "Source: Fifa World Cup Archive")
 
 ggsave("plots/years_atten.png")
