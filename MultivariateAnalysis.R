@@ -1,16 +1,20 @@
 library(tidyverse)
 library(naniar)
-install.packages("kableExtra")
+#install.packages("kableExtra")
 library(kableExtra)
 library(forcats)
-library(RColorBrewer)
+library(png)
 
+# top 5 countries = 5 countries with the highest number of world cup wins:
+# Brazil, Germany, Italy, Argentina, Uruguay
 
 # read in data
 WorldCupMatchesCleaned <- read_csv("data/WorldCupMatchesCleaned.csv")
 WorldCupsCleaned <- read_csv("data/WorldCupsCleaned.csv")
 Cups_Matches_joined <- read_csv("data/Cups_Matches_joined.csv")
 goals_bycountry_perWC <- read_csv("data/goals_bycountry_perWC.csv")
+
+# read in plots
 
 
 # analysis
@@ -149,24 +153,165 @@ stages_attendance_df <- stages_attendance_df |>
                                    "Semi-finals",
                                    "Final")))
 
-stages_attendance_df <- stages_attendance_df |> 
-  mutate(Stage = fct_relevel(Stage, levels = c("Early round", 
-                                               "Quarter-finals",
-                                               "Match for third place",
-                                               "Semi-finals",
-                                               "Final")))
+# stages_attendance_df <- stages_attendance_df |> 
+#   mutate(Stage = fct_relevel(Stage, levels = c("Early round", 
+#                                                "Quarter-finals",
+#                                                "Match for third place",
+#                                                "Semi-finals",
+#                                                "Final")))
 
 
-stages_attendance_df |> ggplot(aes(x=Stage, y = Match_Attendance, fill = Stage)) +
-  geom_boxplot() + theme_minimal() + scale_color_gradient() +
+stages_atten_plot <- stages_attendance_df |> ggplot(aes(x=Stage, y = Match_Attendance, fill = Stage)) +
+  geom_boxplot(alpha = 0.7) + theme_minimal() + scale_color_gradient() +
   labs(title = "Distribution of Match Attendance by Round of the World Cup",
        subtitle = "All rounds before the Quarter-finals are considered an early round",
        x = "Round",
        y = "Attendance") +
+  scale_fill_manual(name = "Stage", 
+                    values = c("skyblue", "deepskyblue", "deepskyblue2", "deepskyblue3", "deepskyblue4")) +
   theme(plot.title = element_text(hjust = 0.5, size = 15, face = "bold"), 
         plot.subtitle = element_text(hjust = 0.5, size = 10), 
         axis.title.x = element_text(hjust = 0.5, size = 10, face = "bold"),
         axis.text.x = element_text(angle = 45),
-        axis.title.y = element_text(hjust = 0.5, size = 10, face = "bold")) 
+        axis.title.y = element_text(hjust = 0.5, size = 10, face = "bold"),
+        legend.title = element_text(hjust = 0.5, size = 10, face = "bold")) 
+
+stages_atten_plot
+ggsave("plots/stages_atten_plot.png")
 
 
+
+# Density plot of the distribution of match attendance for my fav 4 countries to watch
+match_atten_dist_favcountry_plot <- binded_team_goals |> 
+filter(Team_Name %in% c("Brazil", "Germany", "USA", "Argentina")) |> 
+  ggplot(aes(x = Match_Attendance, fill = Team_Name, color = Team_Name)) + 
+  geom_density(alpha = 0.3) + 
+  labs(title = "Distribution of Match Attendance for Selected Teams",
+       x = "Match Attendance") +
+  theme(plot.title = element_text(hjust = 0.5, size = 15, face = "bold"), 
+        plot.subtitle = element_text(hjust = 0.5, size = 10), 
+        axis.title.x = element_text(hjust = 0.5, size = 10, face = "bold"),
+        axis.text.x = element_text(angle = 45),
+        axis.title.y = element_text(hjust = 0.5, size = 10, face = "bold"),
+        legend.title = element_text(hjust = 0.5, size = 10, face = "bold")) 
+
+match_atten_dist_favcountry_plot
+
+ggsave("plots/match_atten_dist_favcountry_plot.png")
+
+# Density plot of the distribution of match attendance for top 5 countries to watch
+match_atten_dist_top5_plot <- binded_team_goals |> 
+  filter(Team_Name %in% c("Brazil", "Germany", "Italy", "Argentina", "Uruguay")) |> 
+  ggplot(aes(x = Match_Attendance, fill = Team_Name, color = Team_Name)) + 
+  geom_density(alpha = 0.3) + 
+  labs(title = "Distribution of Match Attendance for Top Five Teams",
+       subtitle = "These are the five teams that have the highest number of World Cup Wins",
+       x = "Match Attendance") +
+  theme(plot.title = element_text(hjust = 0.5, size = 15, face = "bold"), 
+        plot.subtitle = element_text(hjust = 0.5, size = 10), 
+        axis.title.x = element_text(hjust = 0.5, size = 10, face = "bold"),
+        axis.text.x = element_text(angle = 45),
+        axis.title.y = element_text(hjust = 0.5, size = 10, face = "bold"),
+        legend.title = element_text(hjust = 0.5, size = 10, face = "bold")) 
+
+match_atten_dist_top5_plot
+
+ggsave("plots/match_atten_dist_top5_plot.png")
+
+
+# boxplot of team goals for the match vs match attendance (UNSURE ABOUT THE CONCLUSION)
+match_atten_game_goals_plot <- binded_team_goals |> 
+  ggplot(aes(x = Match_Attendance, y = factor(Team_Goals), fill = factor(Team_Goals),
+             color = factor(Team_Goals))) + 
+  geom_boxplot(alpha = 0.5) +
+  labs(title = "Distribution of Match Attendance vs Goals Scored in the Match",
+       x = "Match Attendance",
+       y = "Team Goals in the Match") +
+  theme(plot.title = element_text(hjust = 0.5, size = 15, face = "bold"), 
+        plot.subtitle = element_text(hjust = 0.5, size = 10), 
+        axis.title.x = element_text(hjust = 0.5, size = 10, face = "bold"),
+        axis.text.x = element_text(angle = 45),
+        axis.title.y = element_text(hjust = 0.5, size = 10, face = "bold"),
+        legend.title = element_text(hjust = 0.5, size = 10, face = "bold")) 
+
+
+
+match_atten_game_goals_plot
+
+
+# Box plot of the distribution of match attendance for my fav 4 countries to watch
+binded_team_goals |> 
+  filter(Team_Name %in% c("Brazil", "Germany", "USA", "Argentina")) |> 
+  ggplot(aes(x = Match_Attendance,  fill = Team_Name)) + 
+  geom_boxplot(alpha = 0.7) + 
+  labs(title = "Distribution of Match Attendance for Selected Teams",
+       x = "Match Attendance") +
+  theme(plot.title = element_text(hjust = 0.5, size = 15, face = "bold"), 
+        plot.subtitle = element_text(hjust = 0.5, size = 10), 
+        axis.title.x = element_text(hjust = 0.5, size = 10, face = "bold"),
+        axis.text.x = element_text(angle = 45),
+        axis.title.y = element_text(hjust = 0.5, size = 10, face = "bold"),
+        legend.title = element_text(hjust = 0.5, size = 10, face = "bold")) 
+
+
+# scatterplot of wc attendance vs qualified teams
+WorldCupsCleaned |> ggplot(aes(x= QualifiedTeams, y = Attendance)) + 
+  geom_line() + geom_point()
+
+
+
+# Goals Scored: 
+
+# Using function to create plots with the 5 highest scoring countries in each world cup
+# from 1994 - 2014
+year_vec <-  c(1994, 1998, 2002, 2006, 2010, 2014)
+
+for(year in year_vec) {
+year_histogram_func <- function(year) {
+  goals_bycountry_perWC |> 
+  filter(Year == {{year}})  |> 
+    arrange(desc(total_goals)) |> 
+    slice_max(total_goals, n=5) |> 
+  ggplot(aes(x= Team_Name, y = total_goals, fill = Team_Name)) + 
+    geom_col() +
+    labs(title = "Top 5 Teams with the Highest Number of Goals per each Selected World Cups",
+         subtitle = "For the World Cups Between 1994 - 2014",
+         x = "Team (Country)",
+         y = "Total Goals") +
+    theme(plot.title = element_text(hjust = 0.5, size = 15, face = "bold"), 
+          plot.subtitle = element_text(hjust = 0.5, size = 10), 
+          axis.title.x = element_text(hjust = 0.5, size = 10, face = "bold"),
+          axis.title.y = element_text(hjust = 0.5, size = 10, face = "bold")) +
+    theme_linedraw()
+   
+}
+plots <- list()
+plots[[year]] <- year_histogram_func(year)
+
+ggsave(plots[[year]],
+       file = paste0("plots/countrygoals_recentWC_top", year, "_plot.png"))
+}
+  
+# use patchwork to put the plots side by side
+countrygoals_recentWC_top1994_plot <- readPNG("plots/countrygoals_recentWC_top1994_plot.png", package = "png")
+countrygoals_recentWC_top1994_plot
+
+
+countrygoals_recentWC_alltimetop5_plot <- goals_bycountry_perWC |> 
+  filter(Year %in% c(1994, 1998, 2002, 2006, 2010, 2014)) |> 
+  filter(Team_Name %in% c( "Brazil", "Germany", "Italy", "Argentina", "Uruguay")) |> 
+  ggplot(aes(x=Team_Name, y = total_goals, fill = Team_Name)) + 
+  geom_col(show.legend = FALSE) + 
+  facet_wrap(~factor(Year)) +
+  labs(title = "Each Country's Total Goals per World Cup",
+       subtitle = "For the World Cups Between 1994 - 2014",
+       x = "Country",
+       y = "Total Goals") +
+  theme(plot.title = element_text(hjust = 0.5, size = 15, face = "bold"), 
+        plot.subtitle = element_text(hjust = 0.5, size = 10), 
+        axis.title.x = element_text(hjust = 0.5, size = 10, face = "bold"),
+        axis.title.y = element_text(hjust = 0.5, size = 10, face = "bold")) +
+  theme_linedraw()
+
+countrygoals_recentWC_alltimetop5_plot
+ggsave("plots/countrygoals_recentWC_alltimetop5_plot.png")
