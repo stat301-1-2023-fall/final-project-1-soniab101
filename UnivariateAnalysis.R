@@ -50,10 +50,6 @@ ggsave("plots/totalgoals_plot.png")
 match_atten_dist_plot <- Cups_Matches_joined |> 
   ggplot(aes(x = Match_Attendance)) + geom_density()
 
-
-match_atten_dist_plot <- binded_team_goals |> 
-  filter(Team_Name %in% c("Brazil", "Germany", "USA", "Argentina")) |> 
-  ggplot(aes(x = Match_Attendance, fill = Team_Name)) + 
-  geom_density(alpha = 0.5)
-
 match_atten_dist_plot
+
+
