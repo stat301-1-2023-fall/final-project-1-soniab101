@@ -97,16 +97,16 @@ Cups_Matches_joined |> slice_head(n=10)
 
 # Explorations
 
-## Which team holds the title of the greatest number of World Cup Wins?
-Firstly, I believed it would be best to answer an important question of which team currently has the most number of World Cup wins. Figure 1 displays the distribution of World Cup wins, and provides some interesting insights.  
+## Which team has the greatest number of World Cup titles?
+Firstly, I believed it would be best to answer an important question of which team currently has won the most World Cups. Figure 1 displays the distribution of World Cup wins, and provides some interesting insights. From this graph, I could conclude that Brazil is the country that has won the most World Cups this far with a total of 5 wins. Germany and Italy are tied for the second most wins of 4. Additionally, Argentina and Uruguay are tied at third with two wins. This helped me form some of my further questions about the data, which I investigate in the rest of this exploration.
+
+
+![Distribution of World Cup Title Wins by Country](plots/winner_plot.png){#fig-bar1}
 
 
 ## Attendance
 
-I wanted to investigate the both the match attendance and overall world cup attendance variables, since I feel like they may have an interesting relationship with other variables, and could even have an effect on teams' performance during matches. From this graph, I could conclude that Brazil is the country that has won the most World Cups this far with a total of 5 wins. Germany and Italy are tied for the second most wins of 4. Additionally, Argentina and Uruguay are tied at third with two wins. This helped me form some of my further questions about the data, which I investigate in the rest of this exploration.
-
-
-![Distribution of World Cup Wins by Country](plots/winner_plot.png){#fig-bar1}
+I wanted to investigate the both the match attendance and overall world cup attendance variables, since I feel like they may have an interesting relationship with other variables, and could even have an effect on teams' performance during matches. 
 
 ### Distribution of Match Attendance Variable
 
@@ -182,6 +182,16 @@ How have the top scoring countries’ performance change over time? Figure 11 be
 # Progress and Conclusion
 I believe I have made great progress in my exploration and analysis of this data, and have gained insights into the relationships between different variables. After investigating the data, I was able to determine which variable names and values needed cleaning, and made the data a lot more organized. Additionally, I learned more about variables such as attendance and goals scored, and how these variables have changed over time. This has helped guide me towards forming my overall research questions, which relate to learning about how the attendance of World Cup matches varies based on which country the match is held in.
 
+
+# Conclusion 
+
+The FIFA World Cup has greatly increased in relevance and popularity over the years, becoming a huge tournament where many teams from all over the world participate and attract millions of viewers and attendees. World Cup matches are attended by tens of thousands of people each year, with a mean attendance of about 45,000 people. I concluded that the match attendance does vary based on certain factors such as which teams are playing and what round of the World Cup we are in. For instance, team USA's matches frequently attract a lower number of attendees (around 35,000 people) than teams like Germany and Brazil. Additionally, as I expected, my analysis supported the fact that there is a positive correlation between match attendance and the stage of the world cup we are in. The median match attendance increased as we moved from the early rounds to the quarter finals, third place, semi-finals, and the finals.
+
+I also learned a lot about the overall total attendance of World Cups through my analysis. Looking at the trend in total World Cup attendance over the years (from 1930 - 2014), I saw that the overall attendance has increased greatly over the years from around 600,000 people in 1930 to 3,300,000 people in 2014. This is definitely attributed to more teams participating in the tournament throughout the years resulting in a large increase in the number of matches played. Additionally, the world population has greatly increased since the time of the first World Cup. Still, however this information about the trend in overall attendance demonstrates the great increase in attention and popularity the World Cup has gained over the years, and the steep peaks in attendance produce thought provoking questions regarding what could have caused the spikes in attendance. I was able to gain insight Differences in World Cup attendance co
+
+ofc, bc of ____
+
+win conditions
 
 
 
