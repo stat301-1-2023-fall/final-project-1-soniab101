@@ -188,13 +188,5 @@ I was able to learn more about the performance of different teams in the World C
 If I were to continue exploring this dataset, I would want to continue to look at the relationships between different variables and goals scored to see how different variables relate to countries' performances in the tournament. I would also want to investigate more into the variables of winner, runner-up, third, and fourth to see how these rankings have changed over time, or which countries consistently make the top 4 rankings. It would also be interesting to explore the geographical distribution of the winners, and even create a map highlighting how the winning countries are distributed around the world. These further explorations could provide valuable insights into how the popularity of soccer and team performance varies depending on which part of the world we look at. 
 
 
-# Appendix
-The figures below show the five teams that performed the best by total number of goals in each World Cup between 1994 and 2014. 
-
-![Top Five Teams' in 1994 by Total Goals](plots/countrygoals_recentWC_top1994_plot.png) ![Top Five Teams' in 1998 by Total Goals](plots/countrygoals_recentWC_top1998_plot.png)
-![Top Five Teams' in 2002 by Total Goals](plots/countrygoals_recentWC_top2002_plot.png)
-![Top Five Teams' in 2006 by Total Goals](plots/countrygoals_recentWC_top2006_plot.png)
-![Top Five Teams' in 2010 by Total Goals](plots/countrygoals_recentWC_top2010_plot.png)
-![Top Five Teams' in 2014 by Total Goals](plots/countrygoals_recentWC_top2014_plot.png)
 
 
