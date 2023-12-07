@@ -1,0 +1,38 @@
+---
+title: "The FIFA World Cup: Executive Summary"
+author: "Sonia Bhatia"
+date: today
+
+format:
+  html:
+    toc: true
+    embed-resources: true
+    
+execute:
+  echo: false
+  warning: false
+
+from: markdown+emoji 
+---
+
+
+
+::: {.callout-tip icon=false}
+
+## Github Repo Link
+
+My github link is below.
+
+[https://github.com/stat301-1-2023-fall/final-project-1-soniab101](https://github.com/stat301-1-2023-fall/final-project-1-soniab101)
+
+:::
+
+## Introduction
+Data on the FIFA World Cup holds a great amount of interesting information related to the popularity of the sport, the performance of the teams, and the changes in the structure of the tournament over time. I wanted to analyze these aspects of the data, focusing on what factors influence attendance of matches and the World Cup as a whole, and analyzing the performance of different teams over time. 
+
+## Attendance
+The attendance of matches can vary significantly based on different factors, including the team playing or which round of the world cup the match is in. While there is overlap of the distribution of the five teams that hold the highest number of World Cup titles, there is still some differences present. For instance, Uruguay has the furthest left peak, indicating that their team frequently has a lower attendance of around 30,000 people at their matches. This could be due to the fact that they have not performed as strongly as they used to in the recent World Cups. Brazil had the highest peak out of all the teams, meaning that it had the most consistent match attendance of around 55,000 people. Additionally, an important conclusion I found was that the match attendance is positively correlated with the round of the World Cup the match is in. There was an increasing trend in the median of match attendance as we moved closer to the final round of the tournament.
+
+I also learned a lot about the overall total attendance of World Cups through my analysis. Looking at the trend in total World Cup attendance over the years (from 1930 - 2014), I saw that the overall attendance has increased greatly over the years from around 600,000 people in 1930 to 3,300,000 people in 2014. This is definitely attributed to more teams participating in the tournament throughout the years resulting in a large increase in the number of matches played. Additionally, the world population has greatly increased since the time of the first World Cup. Still, however this information about the trend in overall attendance demonstrates the great increase in attention and popularity the World Cup has gained over the years, and the steep peaks in attendance produce thought provoking questions regarding what could have caused the spikes in attendance. I was able to find some answers to my questions regarding how the World Cup attendance varies based on which country it is hosted in. For example, I concluded that the World Cup hosted in 1994 in USA had the highest total attendance overall, with about 3.6 million attendees. I found this surprising because I did not realize that soccer was so popular of a sport in America. Brazil and Germany had the second and third highest attendances, respectively, which was less surprising to me since these countries are well known for having very strong soccer teams.   
+
+Displaying the year in the overall attendnace graph...
