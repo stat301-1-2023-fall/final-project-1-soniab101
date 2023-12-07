@@ -67,8 +67,8 @@ Cups_Matches_joined <- Cups_Matches_joined |>
 "Total_Attendance_of_WC" = `Attendance.y`)
 
 Cups_Matches_joined <- subset(Cups_Matches_joined, select = -c(...1))
-WorldCupsCleaned <- subset(WorldCupsCleaned, select = -c(...1,...2))
-WorldCupMatchesCleaned <- subset(WorldCupMatchesCleaned, select = -c(...1,...2))
+WorldCupsCleaned <- subset(WorldCupsCleaned, select = -c(...1))
+WorldCupMatchesCleaned <- subset(WorldCupMatchesCleaned, select = -c(...1))
 
 # fix coding of attendance variable
 WorldCupsCleaned <- WorldCupsCleaned |> 
@@ -78,9 +78,10 @@ WorldCupsCleaned <- WorldCupsCleaned |>
 
 WorldCupMatchesCleaned <- WorldCupMatchesCleaned[-c(853:4572), ]
 
-write.csv(WorldCupsCleaned, "data/WorldCupsCleaned.csv")
-write.csv(WorldCupMatchesCleaned, "data/WorldCupMatchesCleaned.csv")
-write.csv(Cups_Matches_joined, "data/Cups_Matches_joined.csv")
+# change to write_csv
+write_csv(WorldCupsCleaned, "data/WorldCupsCleaned.csv")
+write_csv(WorldCupMatchesCleaned, "data/WorldCupMatchesCleaned.csv")
+write_csv(Cups_Matches_joined, "data/Cups_Matches_joined.csv")
 
 
 # investigating the data
@@ -141,12 +142,20 @@ matches_data_codebook <- tibble(
                    "Away team country's three letter initials"))
 
 
+wc_codebook <- as_data_frame(wc_codebook)
+
+
 wc_codebook <- wc_data_codebook %>%
   kbl() %>%
   kable_styling()
 
 wc_codebook
 
+write_rds(wc_codebook, "data/wc_codebook.rds")
+write_rds(wc_match_codebook, "data/wc_match_codebook.rds")
+
+code<- read_csv("data/wc_codebook.csv")
+code
 wc_match_codebook <- matches_data_codebook %>%
   kbl() %>%
   kable_styling()

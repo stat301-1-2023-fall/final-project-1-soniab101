@@ -1,0 +1,51 @@
+x
+"<table class=""table"" style=""margin-left: auto; margin-right: auto;"">
+ <thead>
+  <tr>
+   <th style=""text-align:left;""> variables </th>
+   <th style=""text-align:left;""> descriptions </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style=""text-align:left;""> Year </td>
+   <td style=""text-align:left;""> Year of the worldcup </td>
+  </tr>
+  <tr>
+   <td style=""text-align:left;""> Country </td>
+   <td style=""text-align:left;""> Country of the worldcup </td>
+  </tr>
+  <tr>
+   <td style=""text-align:left;""> Winner </td>
+   <td style=""text-align:left;""> Team who won the worldcup </td>
+  </tr>
+  <tr>
+   <td style=""text-align:left;""> Runners-Up </td>
+   <td style=""text-align:left;""> Team who was the second place </td>
+  </tr>
+  <tr>
+   <td style=""text-align:left;""> Third </td>
+   <td style=""text-align:left;""> Team who was the third place </td>
+  </tr>
+  <tr>
+   <td style=""text-align:left;""> Fourth </td>
+   <td style=""text-align:left;""> Team who was the fourth place </td>
+  </tr>
+  <tr>
+   <td style=""text-align:left;""> GoalsScored </td>
+   <td style=""text-align:left;""> Total goals scored in the worldcup </td>
+  </tr>
+  <tr>
+   <td style=""text-align:left;""> QualifiedTeams </td>
+   <td style=""text-align:left;""> Total participating teams </td>
+  </tr>
+  <tr>
+   <td style=""text-align:left;""> MatchesPlayed </td>
+   <td style=""text-align:left;""> Total matches played in the cup </td>
+  </tr>
+  <tr>
+   <td style=""text-align:left;""> Attendance </td>
+   <td style=""text-align:left;""> Total attendance of the worldcup </td>
+  </tr>
+</tbody>
+</table>"

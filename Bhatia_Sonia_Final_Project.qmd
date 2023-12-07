@@ -55,7 +55,7 @@ Cups_Matches_joined <- read_csv("data/Cups_Matches_joined.csv")
 ```
 
 ## Introduction
-These datasets about the FIFA World Cup are interesting to me since I enjoy watching soccer matches, especially the World Cup. One dataset contains overall information on the World Cup held every four years, and the other contains specific information about each match held in each World Cup. I believe there are many conclusions that can be drawn from this data, and many interesting questions that can be explored. Some questions I am interested in investigating are if there is any correlation between a team playing a match in their home country and whether that gives them an advantage in winning or not. I am also interested in the differences between attendance of matches.
+These datasets about the FIFA World Cup are interesting to me since I enjoy watching soccer matches, especially the World Cup. One dataset contains overall information on the World Cup held every four years, and the other contains specific information about each match held in each World Cup. I believe there are many conclusions that can be drawn from this data, and many interesting questions that can be explored. Some questions I am interested in investigating are related to the attendance of the matches and of the overall World Cup. For instance, I want to investigate into which countries have a higher average match attendance. I am also interested in how the performances of teams have changed over time, and want to use the number of goals scored as a metric to measure this.
 
 
 ## Data Overview & Quality
@@ -87,12 +87,7 @@ Firstly, I started out by joining my two datasets: World Cups and World Cup Matc
 
 I noticed that the team name Germany was coded both as Germany and also Germany FR. After investigating the meaning of this, I realized that Germany FR was West Germany before the country was reunified. I decided to recode Germany FR as Germany, since that is how the country is considered today, and their overall world cup wins are measured for the country as a whole officially. Additionally, I parsed the Datetime variable in the World Cup Matches dataset, and turned it into a date object. Also, I renamed many of the variable names in the dataset that contained a space in them, since this can be problematic when referring to them in plotting and later code. I renamed them to use an underscore rather than a space. I needed to recode the attendance variable in the WorldCups dataset, as it was a character variable rather than a numerical one. I also realized that both the variable for World Cup total attendance in the World Cups dataset and the variable for match attendance in the World Cup Matches dataset were both named attendance, so in the joined dataset I had to rename them to total_attendance_of_WC and match_attendance respectively. 
 
-After cleaning, I made subsets of my data as I was conducting my analysis that would help me answer my research questions. For example, in my dataset that I created called stages_attendance_df, I mutated the Stage variable so that all preliminary rounds of each World Cup, each with different names, would all be called 'Early round'. My cleaned datasets are stored in my data sub-directory as csv files. Below, I have included the first 10 rows of my joined dataset.
-
-```{r}
-Cups_Matches_joined |> slice_head(n=10)
-```
-
+After cleaning, I made subsets of my data as I was conducting my analysis that would help me answer my research questions. For example, in my dataset that I created called stages_attendance_df, I mutated the Stage variable so that all preliminary rounds of each World Cup, each with different names, would all be called 'Early round'. My cleaned datasets are stored in my data sub-directory as csv files. 
 
 
 # Explorations
@@ -178,13 +173,8 @@ How have the top scoring countries’ performance change over time? Figure 11 be
 ![Top Five Teams' Total Goals for the Recent World Cups](plots/countrygoals_recentWC_alltimetop5_plot.png){#fig-bar11}
 
 
-# trial
-
-![trial](plots/countrygoals_recentWC_top1994_plot.png) ![trial](plots/countrygoals_recentWC_top1998_plot.png)
 
 
-# Progress and Conclusion
-I believe I have made great progress in my exploration and analysis of this data, and have gained insights into the relationships between different variables. After investigating the data, I was able to determine which variable names and values needed cleaning, and made the data a lot more organized. Additionally, I learned more about variables such as attendance and goals scored, and how these variables have changed over time. This has helped guide me towards forming my overall research questions, which relate to learning about how the attendance of World Cup matches varies based on which country the match is held in.
 
 
 # Conclusion 
