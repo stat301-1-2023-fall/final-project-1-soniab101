@@ -28,11 +28,9 @@ years_atten_plot <- WorldCupsCleaned |> ggplot(aes(x = Year, y = Attendance)) +
   labs(title = "Total Attendance at Each World Cup Since 1930", 
        x = "Year", y = "Total Attendance", caption = "Source: Fifa World Cup Archive")
 
-ggsave("plots/years_atten.png")
-
 years_atten_plot
 
-
+ggsave("plots/years_atten.png")
 
 # Bivariate analysis of GoalsScored and Year vars in WorldCupsCleaned dataset
 years_goals_scored_plot <- WorldCupsCleaned |> ggplot(aes(x=Year,y=GoalsScored)) +
@@ -76,7 +74,7 @@ goals_bycountry_perWC |> slice_max(total_goals, n=6)
 #save goals_bycountry_perWC to data folder
 write_csv(goals_bycountry_perWC, "data/goals_bycountry_perWC.csv")
 
-# Top scoring countries total goals for the 6 most recent world cups
+# My fav countries total goals for the 6 most recent world cups
 countrygoals_recentWC_plot <- goals_bycountry_perWC |> 
   filter(Year %in% c(1994, 1998, 2002, 2006, 2010, 2014)) |> 
   filter(Team_Name %in% c("Argentina", "Brazil", "Germany", "Italy")) |> 
